@@ -1,0 +1,16 @@
+---
+- name: Check and reserve available PHP IPAM addresses"
+  hosts: "{{ php_ipam }}" #passed from Survey variable
+  become: true
+  become_method: sudo
+  tasks:
+    - name: "Reserve an IP address"
+      codeaffen.phpipam.address:
+        username: "{{ php_ipam_username }}" #passed from Survey variable
+        password: "{{ php_ipam_password }}" #passed from Survey variable
+        server_url: "https://{{ php_ipam }}" #passed from Survey variable
+        address: "192.168.173.211"
+        section: "TBS LAB"
+        description: "test IP reserve saylin"
+        subnet: "192.168.173.0/24"
+        state: present
